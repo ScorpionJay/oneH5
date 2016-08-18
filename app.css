@@ -37,7 +37,7 @@ li {
   width: 100%; }
   .nav .header {
     height: 40px;
-    background-color: #999;
+    background-color: #fff;
     text-align: center;
     line-height: 40px; }
   .nav .nav-ul {
@@ -51,14 +51,14 @@ li {
       width: 33.33333%;
       text-align: center;
       line-height: 40px;
-      background-color: #999;
+      background-color: #fff;
       height: 40px; }
       .nav .nav-ul li a {
-        color: #fff;
+        color: #aaa;
         font-size: 25px;
         font-family: fantasy; }
       .nav .nav-ul li .active {
-        color: #000; }
+        color: #238CFE; }
 
 /**
 * home 
