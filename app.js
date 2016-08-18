@@ -28795,6 +28795,7 @@
 	exports.addTodo = addTodo;
 	exports.fetchListItem = fetchListItem;
 	exports.fetchList = fetchList;
+	exports.fetchListItemApi = fetchListItemApi;
 	var FETCH_LIST = exports.FETCH_LIST = 'FETCH_LIST';
 	var FETCH_LIST_ITEM = exports.FETCH_LIST_ITEM = 'FETCH_LIST_ITEM';
 
@@ -28804,12 +28805,12 @@
 		};
 	}
 
-	function fetchListItem(index) {
+	function fetchListItem(value) {
 
-		console.log('action', index);
+		console.log('action', value);
 
 		return {
-			type: FETCH_LIST_ITEM, index: index
+			type: FETCH_LIST_ITEM, value: value
 		};
 	}
 
@@ -28822,6 +28823,21 @@
 				return response.json();
 			}).then(function (json) {
 				dispatch(addTodo(json));
+			}).catch(function (ex) {
+				console.log('parsing failed', ex);
+			});
+		};
+	}
+
+	function fetchListItemApi(id) {
+		return function (dispatch) {
+			fetch('https://gist.githubusercontent.com/ScorpionJay/de11dc5bacefea9cee5394b73f456688/raw/e86fd421e4bce5c85dd87d29ddc7315ec1d33eed/list.json', {
+				//mode: "cors"
+			}).then(function (response) {
+
+				return response.json();
+			}).then(function (json) {
+				dispatch(fetchListItem(json[id - 1]));
 			}).catch(function (ex) {
 				console.log('parsing failed', ex);
 			});
@@ -29036,9 +29052,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRedux = __webpack_require__(189);
+
 	var _ItemDetail = __webpack_require__(266);
 
 	var _ItemDetail2 = _interopRequireDefault(_ItemDetail);
+
+	var _home = __webpack_require__(261);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29058,12 +29078,21 @@
 		}
 
 		_createClass(List, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				console.log('componentDidMount' + this.props.params.id);
+
+				var dispatch = this.props.dispatch;
+
+				dispatch((0, _home.fetchListItemApi)(this.props.params.id));
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_ItemDetail2.default, null)
+					_react2.default.createElement(_ItemDetail2.default, { data: this.props.item })
 				);
 			}
 		}]);
@@ -29072,6 +29101,16 @@
 	}(_react.Component);
 
 	exports.default = List;
+
+
+	function map(state) {
+		console.log("state", state);
+		return {
+			item: state.home.fetchItem
+		};
+	}
+
+	exports.default = (0, _reactRedux.connect)(map)(List);
 
 /***/ },
 /* 266 */
@@ -29107,20 +29146,25 @@
 		}
 
 		_createClass(List, [{
-			key: 'componentDidMount',
-
-
-			// 渲染完成
-			value: function componentDidMount() {
-				console.log('componentDidMount' + this.props.params.id);
-			}
-		}, {
 			key: 'render',
 			value: function render() {
+				var _props$data = this.props.data;
+				var id = _props$data.id;
+				var name = _props$data.name;
+				var description = _props$data.description;
+
 				return _react2.default.createElement(
 					'div',
 					null,
-					'test'
+					'id:',
+					id,
+					_react2.default.createElement('br', null),
+					'name:',
+					name,
+					_react2.default.createElement('br', null),
+					'description:',
+					description,
+					_react2.default.createElement('br', null)
 				);
 			}
 		}]);
@@ -29703,16 +29747,27 @@
 	  switch (action.type) {
 	    case _home.FETCH_LIST:
 	      return action.text;
+	    default:
+	      return state;
+	  }
+	}
+
+	function fetchItem() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
 	    case _home.FETCH_LIST_ITEM:
 	      console.log('reducers', action.index);
-	      return state[action.index];
+	      console.log('state', state);
+	      return Object.assign({}, action.value);
 	    default:
 	      return state;
 	  }
 	}
 
 	var todoApp = (0, _redux.combineReducers)({
-	  fetchList: fetchList
+	  fetchList: fetchList, fetchItem: fetchItem
 	});
 
 	exports.default = todoApp;

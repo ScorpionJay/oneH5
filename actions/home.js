@@ -7,12 +7,12 @@ export function addTodo(text){
 	}
 }
 
-export function fetchListItem(index){
+export function fetchListItem(value){
 
-	console.log('action',index)
+	console.log('action',value)
 
 	return {
-		type:FETCH_LIST_ITEM,index
+		type:FETCH_LIST_ITEM,value
 	}
 }
 
@@ -26,6 +26,21 @@ export function fetchList(index){
     return response.json()
   }).then(function(json) {
      dispatch(addTodo(json))
+  }).catch(function(ex) {
+    console.log('parsing failed', ex)
+  })}
+}
+
+
+export function fetchListItemApi(id){
+	 return dispatch => {
+	 	fetch('https://gist.githubusercontent.com/ScorpionJay/de11dc5bacefea9cee5394b73f456688/raw/e86fd421e4bce5c85dd87d29ddc7315ec1d33eed/list.json',{
+			//mode: "cors"
+			}).then(function(response) {
+				
+    return response.json()
+  }).then(function(json) {
+     dispatch(fetchListItem(json[id-1]))
   }).catch(function(ex) {
     console.log('parsing failed', ex)
   })}

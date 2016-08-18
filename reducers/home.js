@@ -5,17 +5,24 @@ function fetchList(state = [], action) {
   switch (action.type) {
     case FETCH_LIST:
       return action.text
-    case FETCH_LIST_ITEM:
-    	console.log('reducers',action.index)
-      return state[action.index]
     default:
       return state
   }
 }
 
+function fetchItem(state = [], action) {
+  switch (action.type) {
+    case FETCH_LIST_ITEM:
+    	console.log('reducers',action.index)
+    	console.log('state',state)
+      return Object.assign({}, action.value)
+    default:
+      return state
+  }
+}
 
 const todoApp = combineReducers({
-  fetchList
+  fetchList,fetchItem
 })
 
 export default todoApp

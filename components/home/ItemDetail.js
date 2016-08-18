@@ -4,19 +4,13 @@ import React , { Component } from 'react'
 export default class List extends Component{
 
 
-// 渲染完成
-	componentDidMount(){
-		console.log('componentDidMount' + this.props.params.id);
-
-		
-
-
-	}
-
 	render(){
+		const {id,name,description} = this.props.data
 		return (
 			<div>
-				test
+				id:{id}<br/>
+				name:{name}<br/>
+				description:{description}<br/>
 			</div>
 		);
 	}
