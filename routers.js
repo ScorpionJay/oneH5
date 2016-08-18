@@ -1,7 +1,8 @@
 import React , {Component } from 'react'
 import { Router, IndexRoute ,Route, hashHistory,Link,Redirect } from 'react-router'
 
-import Todos from './containers/Todos'
+import Home from './containers/Home'
+import ItemDetail from './containers/ItemDetail'
 import TodoItem from './containers/TodoItem'
 import Find from './containers/Find'
 import Me from './containers/Me'
@@ -13,13 +14,13 @@ class App extends Component{
 		return (
 			<div className="nav">
 
-				<div className='header'>头部</div>
+				<div style={Styles.header}>头部</div>
 				
 				<div className="content">{this.props.children}</div>
 
 				<div className='footer'>
 					<ul className="nav-ul">
-						<li><Link to="/todos" activeClassName="active">首页</Link></li>
+						<li><Link to="/home" activeClassName="active">首页</Link></li>
 						<li><Link to="/find" activeClassName="active">发现</Link></li>
 						<li><Link to="/me" activeClassName="active">我</Link></li>
 					</ul>
@@ -34,27 +35,39 @@ class App extends Component{
 const Routes = {
 	path: '/',
 	component: App,
-	indexRoute :{component: Todos},
+	indexRoute :{component: Home},
 	childRoutes: [
-		{ path: 'todos', component: Todos},
+		{ path: 'home', component: Home},
 		{ path: 'todoItem', component: TodoItem},
 		{ path: 'find', component: Find},
 		{ path: 'me', component: Me},
+		{ path: 'itemDetail/:id', component: ItemDetail},
 		{
-			path: 'inbox',
-			component: Todos,
+			path: 'itemDetail',
+			component: ItemDetail,
 			childRoutes : [{
-				path: 'messages/:id',
-				onEnter: ({ params }, replace) => replace(`/messages/${params.id}`)
+				path: 'itemDetal/:id',
+				onEnter: ({ params }, replace) => replace(`/itemDetail/${params.id}`)
 			}]
 		},
 		{
-			component: Todos,
+			component: Home,
 			childRoutes: [{
-				path: 'messages/:id',component:Todos
+				path: 'itemDetail/:id',component:ItemDetail
 			}]
 		}
 	]
+}
+
+// 样式
+const Styles = {
+	header:{
+			background:'black',
+			textAlign:'center',
+			height:'40px',
+			lineHeight:'40px',
+			color:'#fff'
+	}
 }
 
 

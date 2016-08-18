@@ -10,7 +10,13 @@ class App extends Component {
     const { dispatch, reducerTodos } = this.props
     return (
       <div>
-        Find
+        <AddTodo
+          onAddClick={text =>
+            dispatch(fetchList(text))
+          } />
+        <TodoList
+          todos={reducerTodos} 
+          onTodoClick={index=> dispatch(completeTodo(index))}/>
       </div>
     )
   }
@@ -20,7 +26,7 @@ class App extends Component {
 function map(state) {
   console.log("state" , state )
   return {
-    reducerTodos: state.todos
+    reducerTodos: state.reducers.todos
   }
 }
 
