@@ -17,7 +17,7 @@ class App extends Component{
 		return (
 			<div className="nav">
 
-				<div style={Styles.header}>头部</div>
+				
 				
 				<div className="content">{this.props.children}</div>
 

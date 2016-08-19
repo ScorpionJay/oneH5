@@ -62,13 +62,13 @@
 
 	var _routers2 = _interopRequireDefault(_routers);
 
-	var _stores = __webpack_require__(287);
+	var _stores = __webpack_require__(288);
 
 	var _stores2 = _interopRequireDefault(_stores);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(292);
+	__webpack_require__(293);
 
 	var store = (0, _stores2.default)();
 	(0, _reactDom.render)(_react2.default.createElement(
@@ -28575,19 +28575,19 @@
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _ItemDetail = __webpack_require__(278);
+	var _ItemDetail = __webpack_require__(279);
 
 	var _ItemDetail2 = _interopRequireDefault(_ItemDetail);
 
-	var _TodoItem = __webpack_require__(280);
+	var _TodoItem = __webpack_require__(281);
 
 	var _TodoItem2 = _interopRequireDefault(_TodoItem);
 
-	var _Find = __webpack_require__(285);
+	var _Find = __webpack_require__(286);
 
 	var _Find2 = _interopRequireDefault(_Find);
 
-	var _Me = __webpack_require__(286);
+	var _Me = __webpack_require__(287);
 
 	var _Me2 = _interopRequireDefault(_Me);
 
@@ -28615,11 +28615,6 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'nav' },
-					_react2.default.createElement(
-						'div',
-						{ style: Styles.header },
-						'头部'
-					),
 					_react2.default.createElement(
 						'div',
 						{ className: 'content' },
@@ -29002,6 +28997,10 @@
 
 	var _List2 = _interopRequireDefault(_List);
 
+	var _Bar = __webpack_require__(278);
+
+	var _Bar2 = _interopRequireDefault(_Bar);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29036,6 +29035,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(_Bar2.default, { center: '首页' }),
 	        _react2.default.createElement(_Slide2.default, null),
 	        _react2.default.createElement(_List2.default, { data: this.props.data })
 	      );
@@ -29154,7 +29154,7 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					'轮播'
+					'轮播组件'
 				);
 			}
 		}]);
@@ -29323,9 +29323,109 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactFa = __webpack_require__(260);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Bar = function (_Component) {
+		_inherits(Bar, _Component);
+
+		function Bar() {
+			_classCallCheck(this, Bar);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Bar).apply(this, arguments));
+		}
+
+		_createClass(Bar, [{
+			key: '_back',
+			value: function _back() {
+				history.go(-1);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var left = void 0;
+				if (this.props.left) {
+					left = _react2.default.createElement(_reactFa.Icon, { name: 'chevron-left', onClick: this._back });
+				}
+
+				return _react2.default.createElement(
+					'div',
+					{ style: Styles.container },
+					_react2.default.createElement(
+						'div',
+						{ style: Styles.left },
+						left
+					),
+					_react2.default.createElement(
+						'div',
+						{ style: Styles.center },
+						this.props.center
+					),
+					_react2.default.createElement(
+						'div',
+						{ style: Styles.right },
+						this.props.right
+					)
+				);
+			}
+		}]);
+
+		return Bar;
+	}(_react.Component);
+
+	// 样式
+
+
+	exports.default = Bar;
+	var Styles = {
+		container: {
+			background: 'black',
+			height: 30,
+			lineHeight: '30px',
+			color: '#fff',
+			display: 'flex',
+			flex: 1,
+			padding: 5
+		},
+		left: {
+			flex: 1
+		},
+		center: {
+			flex: 1,
+			textAlign: 'center'
+		},
+		right: {
+			flex: 1,
+			textAlign: 'right'
+		}
+	};
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactRedux = __webpack_require__(189);
 
-	var _ItemDetail = __webpack_require__(279);
+	var _ItemDetail = __webpack_require__(280);
 
 	var _ItemDetail2 = _interopRequireDefault(_ItemDetail);
 
@@ -29384,7 +29484,7 @@
 	exports.default = (0, _reactRedux.connect)(map)(List);
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29398,6 +29498,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _Bar = __webpack_require__(278);
+
+	var _Bar2 = _interopRequireDefault(_Bar);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29427,6 +29531,7 @@
 				return _react2.default.createElement(
 					'div',
 					null,
+					_react2.default.createElement(_Bar2.default, { left: 'back', center: '详情' }),
 					'id:',
 					id,
 					_react2.default.createElement('br', null),
@@ -29446,7 +29551,7 @@
 	exports.default = List;
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29463,13 +29568,13 @@
 
 	var _reactRedux = __webpack_require__(189);
 
-	var _actions = __webpack_require__(281);
+	var _actions = __webpack_require__(282);
 
-	var _AddTodo = __webpack_require__(282);
+	var _AddTodo = __webpack_require__(283);
 
 	var _AddTodo2 = _interopRequireDefault(_AddTodo);
 
-	var _TodoList = __webpack_require__(283);
+	var _TodoList = __webpack_require__(284);
 
 	var _TodoList2 = _interopRequireDefault(_TodoList);
 
@@ -29529,7 +29634,7 @@
 	exports.default = (0, _reactRedux.connect)(map)(App);
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29577,7 +29682,7 @@
 	}
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29643,7 +29748,7 @@
 	exports.default = AddTodo;
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29660,7 +29765,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Todo = __webpack_require__(284);
+	var _Todo = __webpack_require__(285);
 
 	var _Todo2 = _interopRequireDefault(_Todo);
 
@@ -29706,7 +29811,7 @@
 	exports.default = TodoList;
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29761,7 +29866,7 @@
 	exports.default = Todo;
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29778,13 +29883,13 @@
 
 	var _reactRedux = __webpack_require__(189);
 
-	var _actions = __webpack_require__(281);
+	var _actions = __webpack_require__(282);
 
-	var _AddTodo = __webpack_require__(282);
+	var _AddTodo = __webpack_require__(283);
 
 	var _AddTodo2 = _interopRequireDefault(_AddTodo);
 
-	var _TodoList = __webpack_require__(283);
+	var _TodoList = __webpack_require__(284);
 
 	var _TodoList2 = _interopRequireDefault(_TodoList);
 
@@ -29843,7 +29948,7 @@
 	exports.default = (0, _reactRedux.connect)(map)(App);
 
 /***/ },
-/* 286 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29860,13 +29965,13 @@
 
 	var _reactRedux = __webpack_require__(189);
 
-	var _actions = __webpack_require__(281);
+	var _actions = __webpack_require__(282);
 
-	var _AddTodo = __webpack_require__(282);
+	var _AddTodo = __webpack_require__(283);
 
 	var _AddTodo2 = _interopRequireDefault(_AddTodo);
 
-	var _TodoList = __webpack_require__(283);
+	var _TodoList = __webpack_require__(284);
 
 	var _TodoList2 = _interopRequireDefault(_TodoList);
 
@@ -29917,18 +30022,18 @@
 	exports.default = (0, _reactRedux.connect)(map)(App);
 
 /***/ },
-/* 287 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _redux = __webpack_require__(175);
 
-	var _reduxThunk = __webpack_require__(288);
+	var _reduxThunk = __webpack_require__(289);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _index = __webpack_require__(289);
+	var _index = __webpack_require__(290);
 
 	var _index2 = _interopRequireDefault(_index);
 
@@ -29942,7 +30047,7 @@
 	};
 
 /***/ },
-/* 288 */
+/* 289 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29970,7 +30075,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 289 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29981,11 +30086,11 @@
 
 	var _redux = __webpack_require__(175);
 
-	var _home = __webpack_require__(290);
+	var _home = __webpack_require__(291);
 
 	var _home2 = _interopRequireDefault(_home);
 
-	var _reducers = __webpack_require__(291);
+	var _reducers = __webpack_require__(292);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -29998,7 +30103,7 @@
 	exports.default = todoApp;
 
 /***/ },
-/* 290 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30044,7 +30149,7 @@
 	exports.default = todoApp;
 
 /***/ },
-/* 291 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30055,7 +30160,7 @@
 
 	var _redux = __webpack_require__(175);
 
-	var _actions = __webpack_require__(281);
+	var _actions = __webpack_require__(282);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -30085,7 +30190,7 @@
 	exports.default = todoApp;
 
 /***/ },
-/* 292 */
+/* 293 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

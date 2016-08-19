@@ -5,6 +5,8 @@ import { fetchList,fetchListItem } from '../actions/home'
 import Slide from '../components/Home/Slide'
 import List from '../components/Home/List'
 
+import Bar from '../components/common/Bar'
+
 class App extends Component {
 
   componentDidMount(){
@@ -16,6 +18,8 @@ class App extends Component {
     const { dispatch } = this.props
     return (
       <div>
+        <Bar center='首页'/>
+
         <Slide/>
         <List data={this.props.data} />
       </div>
