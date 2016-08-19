@@ -62,13 +62,13 @@
 
 	var _routers2 = _interopRequireDefault(_routers);
 
-	var _stores = __webpack_require__(288);
+	var _stores = __webpack_require__(289);
 
 	var _stores2 = _interopRequireDefault(_stores);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(293);
+	__webpack_require__(294);
 
 	var store = (0, _stores2.default)();
 	(0, _reactDom.render)(_react2.default.createElement(
@@ -29448,6 +29448,10 @@
 
 	var _home = __webpack_require__(274);
 
+	var _Bar = __webpack_require__(278);
+
+	var _Bar2 = _interopRequireDefault(_Bar);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29480,7 +29484,12 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_ItemDetail2.default, { data: this.props.item })
+					_react2.default.createElement(_Bar2.default, { left: 'back', center: '详情' }),
+					_react2.default.createElement(
+						'div',
+						{ style: Styles.content },
+						_react2.default.createElement(_ItemDetail2.default, { data: this.props.item })
+					)
 				);
 			}
 		}]);
@@ -29500,6 +29509,14 @@
 
 	exports.default = (0, _reactRedux.connect)(map)(List);
 
+
+	var Styles = {
+		content: {
+			marginTop: 50,
+			marginBottom: 50
+		}
+	};
+
 /***/ },
 /* 280 */
 /***/ function(module, exports, __webpack_require__) {
@@ -29507,7 +29524,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+			value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -29529,54 +29546,49 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var List = function (_Component) {
-		_inherits(List, _Component);
+			_inherits(List, _Component);
 
-		function List() {
-			_classCallCheck(this, List);
+			function List() {
+					_classCallCheck(this, List);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(List).apply(this, arguments));
-		}
-
-		_createClass(List, [{
-			key: 'render',
-			value: function render() {
-				var _props$data = this.props.data;
-				var id = _props$data.id;
-				var name = _props$data.name;
-				var description = _props$data.description;
-
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(_Bar2.default, { left: 'back', center: '详情' }),
-					_react2.default.createElement(
-						'div',
-						{ style: Styles.content },
-						'id:',
-						id,
-						_react2.default.createElement('br', null),
-						'name:',
-						name,
-						_react2.default.createElement('br', null),
-						'description:',
-						description,
-						_react2.default.createElement('br', null)
-					)
-				);
+					return _possibleConstructorReturn(this, Object.getPrototypeOf(List).apply(this, arguments));
 			}
-		}]);
 
-		return List;
+			_createClass(List, [{
+					key: 'render',
+					value: function render() {
+							var _props$data = this.props.data;
+							var id = _props$data.id;
+							var name = _props$data.name;
+							var description = _props$data.description;
+
+							return _react2.default.createElement(
+									'div',
+									null,
+									'id:',
+									id,
+									_react2.default.createElement('br', null),
+									'name:',
+									name,
+									_react2.default.createElement('br', null),
+									'description:',
+									description,
+									_react2.default.createElement('br', null)
+							);
+					}
+			}]);
+
+			return List;
 	}(_react.Component);
 
 	exports.default = List;
 
 
 	var Styles = {
-		content: {
-			marginTop: 50,
-			marginBottom: 50
-		}
+			content: {
+					marginTop: 50,
+					marginBottom: 50
+			}
 	};
 
 /***/ },
@@ -29922,6 +29934,10 @@
 
 	var _TodoList2 = _interopRequireDefault(_TodoList);
 
+	var _Bar = __webpack_require__(278);
+
+	var _Bar2 = _interopRequireDefault(_Bar);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29950,16 +29966,20 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'todos',
-	        _react2.default.createElement(_AddTodo2.default, {
-	          onAddClick: function onAddClick(text) {
-	            return dispatch((0, _actions.fetchList)(text));
-	          } }),
-	        _react2.default.createElement(_TodoList2.default, {
-	          todos: reducerTodos,
-	          onTodoClick: function onTodoClick(index) {
-	            return dispatch((0, _actions.completeTodo)(index));
-	          } })
+	        _react2.default.createElement(_Bar2.default, { center: '发现' }),
+	        _react2.default.createElement(
+	          'div',
+	          { style: Styles.content },
+	          _react2.default.createElement(_AddTodo2.default, {
+	            onAddClick: function onAddClick(text) {
+	              return dispatch((0, _actions.fetchList)(text));
+	            } }),
+	          _react2.default.createElement(_TodoList2.default, {
+	            todos: reducerTodos,
+	            onTodoClick: function onTodoClick(index) {
+	              return dispatch((0, _actions.completeTodo)(index));
+	            } })
+	        )
 	      );
 	    }
 	  }]);
@@ -29976,6 +29996,14 @@
 
 	// 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
 	exports.default = (0, _reactRedux.connect)(map)(App);
+
+
+	var Styles = {
+	  content: {
+	    marginTop: 50,
+	    marginBottom: 50
+	  }
+	};
 
 /***/ },
 /* 287 */
@@ -30005,6 +30033,14 @@
 
 	var _TodoList2 = _interopRequireDefault(_TodoList);
 
+	var _Bar = __webpack_require__(278);
+
+	var _Bar2 = _interopRequireDefault(_Bar);
+
+	var _Me = __webpack_require__(288);
+
+	var _Me2 = _interopRequireDefault(_Me);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30033,7 +30069,12 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'ME'
+	        _react2.default.createElement(_Bar2.default, { center: '我' }),
+	        _react2.default.createElement(
+	          'div',
+	          { style: Styles.content },
+	          _react2.default.createElement(_Me2.default, null)
+	        )
 	      );
 	    }
 	  }]);
@@ -30048,8 +30089,15 @@
 	  };
 	}
 
-	// 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
 	exports.default = (0, _reactRedux.connect)(map)(App);
+
+
+	var Styles = {
+	  content: {
+	    marginTop: 50,
+	    marginBottom: 50
+	  }
+	};
 
 /***/ },
 /* 288 */
@@ -30057,13 +30105,99 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Bar = __webpack_require__(278);
+
+	var _Bar2 = _interopRequireDefault(_Bar);
+
+	var _reactFa = __webpack_require__(260);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Me = function (_Component) {
+		_inherits(Me, _Component);
+
+		function Me() {
+			_classCallCheck(this, Me);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Me).apply(this, arguments));
+		}
+
+		_createClass(Me, [{
+			key: 'render',
+			value: function render() {
+
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						null,
+						'头像'
+					),
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'div',
+							null,
+							'相册',
+							_react2.default.createElement(_reactFa.Icon, { name: 'angle-right' })
+						),
+						_react2.default.createElement(
+							'div',
+							null,
+							_react2.default.createElement(_reactFa.Icon, { name: 'cube' }),
+							'收藏',
+							_react2.default.createElement(_reactFa.Icon, { name: 'angle-right' })
+						),
+						_react2.default.createElement(
+							'div',
+							null,
+							'设置',
+							_react2.default.createElement(_reactFa.Icon, { name: 'angle-right' })
+						)
+					)
+				);
+			}
+		}]);
+
+		return Me;
+	}(_react.Component);
+
+	exports.default = Me;
+
+
+	var Styles = {};
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	var _redux = __webpack_require__(175);
 
-	var _reduxThunk = __webpack_require__(289);
+	var _reduxThunk = __webpack_require__(290);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _index = __webpack_require__(290);
+	var _index = __webpack_require__(291);
 
 	var _index2 = _interopRequireDefault(_index);
 
@@ -30077,7 +30211,7 @@
 	};
 
 /***/ },
-/* 289 */
+/* 290 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30105,7 +30239,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 290 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30116,11 +30250,11 @@
 
 	var _redux = __webpack_require__(175);
 
-	var _home = __webpack_require__(291);
+	var _home = __webpack_require__(292);
 
 	var _home2 = _interopRequireDefault(_home);
 
-	var _reducers = __webpack_require__(292);
+	var _reducers = __webpack_require__(293);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -30133,7 +30267,7 @@
 	exports.default = todoApp;
 
 /***/ },
-/* 291 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30179,7 +30313,7 @@
 	exports.default = todoApp;
 
 /***/ },
-/* 292 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30220,7 +30354,7 @@
 	exports.default = todoApp;
 
 /***/ },
-/* 293 */
+/* 294 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

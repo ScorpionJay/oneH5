@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { addTodo,completeTodo ,fetchList} from '../actions/actions'
 import AddTodo from '../components/AddTodo'
 import TodoList from '../components/TodoList'
+import Bar from '../components/common/Bar'
+import Me from '../components/me/Me'
 
 class App extends Component {
   render() {
@@ -10,7 +12,10 @@ class App extends Component {
     const { dispatch, reducerTodos } = this.props
     return (
       <div>
-        ME
+        <Bar center='我'/>
+        <div style={Styles.content}>
+          <Me />
+        </div>
       </div>
     )
   }
@@ -24,5 +29,11 @@ function map(state) {
   }
 }
 
-// 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
 export default connect(map)(App)
+
+const Styles = {
+  content:{
+    marginTop:50,
+    marginBottom:50,
+  }
+}

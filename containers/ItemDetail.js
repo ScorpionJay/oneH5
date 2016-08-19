@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import ItemDeatail from '../components/Home/ItemDetail'
 
 import { fetchListItemApi } from '../actions/home'
+import Bar from '../components/common/Bar'
+
 
 export default class List extends Component{
 
@@ -18,7 +20,11 @@ export default class List extends Component{
 	render(){
 		return (
 			<div>
-				<ItemDeatail data={this.props.item}/>
+				<Bar left='back' center='详情'/>
+
+				<div style={Styles.content}>
+					<ItemDeatail data={this.props.item}/>
+				</div>
 			</div>
 		);
 	}
@@ -33,3 +39,10 @@ function map(state) {
 }
 
 export default connect(map)(List)
+
+const Styles = {
+  content:{
+    marginTop:50,
+    marginBottom:50,
+  }
+}
