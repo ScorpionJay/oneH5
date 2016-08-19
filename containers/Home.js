@@ -19,9 +19,10 @@ class App extends Component {
     return (
       <div>
         <Bar center='首页'/>
-
-        <Slide/>
-        <List data={this.props.data} />
+        <div style={Styles.content}>
+          <Slide/>
+          <List data={this.props.data} />
+        </div>
       </div>
     )
   }
@@ -31,6 +32,14 @@ function map(state) {
   console.log("state" , state )
   return {
     data: state.home.fetchList
+  }
+}
+
+// 样式
+const Styles = {
+  content:{
+    marginTop:50,
+    marginBottom:50,
   }
 }
 

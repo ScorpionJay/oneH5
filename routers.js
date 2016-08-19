@@ -19,7 +19,7 @@ class App extends Component{
 
 				
 				
-				<div className="content">{this.props.children}</div>
+				<div className="content" >{this.props.children}</div>
 
 				<div className='footer'>
 					<ul className="nav-ul">
@@ -77,16 +77,6 @@ const Routes = {
 	]
 }
 
-// 样式
-const Styles = {
-	header:{
-			background:'black',
-			textAlign:'center',
-			height:'40px',
-			lineHeight:'40px',
-			color:'#fff'
-	}
-}
 
 
 export default Routes

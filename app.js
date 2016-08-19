@@ -28702,17 +28702,6 @@
 		}]
 	};
 
-	// 样式
-	var Styles = {
-		header: {
-			background: 'black',
-			textAlign: 'center',
-			height: '40px',
-			lineHeight: '40px',
-			color: '#fff'
-		}
-	};
-
 	exports.default = Routes;
 
 /***/ },
@@ -29036,8 +29025,12 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Bar2.default, { center: '首页' }),
-	        _react2.default.createElement(_Slide2.default, null),
-	        _react2.default.createElement(_List2.default, { data: this.props.data })
+	        _react2.default.createElement(
+	          'div',
+	          { style: Styles.content },
+	          _react2.default.createElement(_Slide2.default, null),
+	          _react2.default.createElement(_List2.default, { data: this.props.data })
+	        )
 	      );
 	    }
 	  }]);
@@ -29051,6 +29044,14 @@
 	    data: state.home.fetchList
 	  };
 	}
+
+	// 样式
+	var Styles = {
+	  content: {
+	    marginTop: 50,
+	    marginBottom: 50
+	  }
+	};
 
 	exports.default = (0, _reactRedux.connect)(map)(App);
 
@@ -29154,7 +29155,20 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					'轮播组件'
+					'轮播组件',
+					_react2.default.createElement('br', null),
+					'轮播组件',
+					_react2.default.createElement('br', null),
+					'轮播组件',
+					_react2.default.createElement('br', null),
+					'轮播组件',
+					_react2.default.createElement('br', null),
+					'轮播组件',
+					_react2.default.createElement('br', null),
+					'轮播组件',
+					_react2.default.createElement('br', null),
+					'轮播组件',
+					_react2.default.createElement('br', null)
 				);
 			}
 		}]);
@@ -29392,7 +29406,10 @@
 			color: '#fff',
 			display: 'flex',
 			flex: 1,
-			padding: 5
+			padding: 5,
+			position: 'fixed',
+			width: '100%',
+			top: 0
 		},
 		left: {
 			flex: 1
@@ -29532,15 +29549,19 @@
 					'div',
 					null,
 					_react2.default.createElement(_Bar2.default, { left: 'back', center: '详情' }),
-					'id:',
-					id,
-					_react2.default.createElement('br', null),
-					'name:',
-					name,
-					_react2.default.createElement('br', null),
-					'description:',
-					description,
-					_react2.default.createElement('br', null)
+					_react2.default.createElement(
+						'div',
+						{ style: Styles.content },
+						'id:',
+						id,
+						_react2.default.createElement('br', null),
+						'name:',
+						name,
+						_react2.default.createElement('br', null),
+						'description:',
+						description,
+						_react2.default.createElement('br', null)
+					)
 				);
 			}
 		}]);
@@ -29549,6 +29570,14 @@
 	}(_react.Component);
 
 	exports.default = List;
+
+
+	var Styles = {
+		content: {
+			marginTop: 50,
+			marginBottom: 50
+		}
+	};
 
 /***/ },
 /* 281 */
@@ -29674,7 +29703,7 @@
 				return response.json();
 			}).then(function (json) {
 				console.log('parsed json', json);
-				dispatch(addTodo(json[index].description));
+				dispatch(addTodo(index));
 			}).catch(function (ex) {
 				console.log('parsing failed', ex);
 			});
@@ -29921,6 +29950,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        'todos',
 	        _react2.default.createElement(_AddTodo2.default, {
 	          onAddClick: function onAddClick(text) {
 	            return dispatch((0, _actions.fetchList)(text));

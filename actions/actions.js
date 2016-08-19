@@ -31,7 +31,7 @@ export function fetchList(index){
     return response.json()
   }).then(function(json) {
     console.log('parsed json', json)
-     dispatch(addTodo(json[index].description))
+     dispatch(addTodo(index))
   }).catch(function(ex) {
     console.log('parsing failed', ex)
   })}

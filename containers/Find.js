@@ -10,6 +10,8 @@ class App extends Component {
     const { dispatch, reducerTodos } = this.props
     return (
       <div>
+        todos
+
         <AddTodo
           onAddClick={text =>
             dispatch(fetchList(text))

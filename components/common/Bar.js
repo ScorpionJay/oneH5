@@ -40,7 +40,10 @@ const Styles = {
 		color:'#fff',
 		display:'flex',
 		flex:1,
-		padding:5
+		padding:5,
+		position:'fixed',
+		width:'100%',
+		top:0,
 	},
 	left:{
 		flex:1,
