@@ -21,6 +21,14 @@ module.exports = {
                 test: /\.(jpe?g|png|gif|svg|ico)$/,
                 loader: 'url?limit=8024&name=img/[name].[ext]'
             },
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+            },
+            {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: 'file-loader'
+            }
         ]
     },
 

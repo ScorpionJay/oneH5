@@ -1,11 +1,14 @@
 import React , {Component } from 'react'
 import { Router, IndexRoute ,Route, hashHistory,Link,Redirect } from 'react-router'
 
+import {Icon} from 'react-fa'
+
 import Home from './containers/Home'
 import ItemDetail from './containers/ItemDetail'
 import TodoItem from './containers/TodoItem'
 import Find from './containers/Find'
 import Me from './containers/Me'
+
 
 
 /* App */
@@ -20,9 +23,24 @@ class App extends Component{
 
 				<div className='footer'>
 					<ul className="nav-ul">
-						<li><Link to="/home" activeClassName="active">首页</Link></li>
-						<li><Link to="/find" activeClassName="active">发现</Link></li>
-						<li><Link to="/me" activeClassName="active">我</Link></li>
+						<li>
+							<Link to="/home" activeClassName="active"> 
+								<Icon name="star" />
+								<div>首页</div>
+							</Link>
+						</li>
+						<li>
+							<Link to="/find" activeClassName="active">
+								<Icon name="rocket" />
+								<div>发现</div>
+							</Link>
+						</li>
+						<li>
+							<Link to="/me" activeClassName="active">
+								<Icon name="user" />
+								<div>我</div>
+							</Link>
+						</li>
 					</ul>
 				</div>
 				

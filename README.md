@@ -30,4 +30,7 @@ one h5 demo
 	webpack
 
 
+##　TODO
+1. fetch is no supported by Safari
 
+	https://github.com/github/fetch
