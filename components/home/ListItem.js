@@ -1,13 +1,15 @@
 import React , { Component } from 'react'
 import {Link } from 'react-router'
 
+import {Icon} from 'react-fa'
+
 export default class ListItem extends Component{
 	render(){
 		return (
 			<Link to={`/itemDetail/${this.props.id}`} >
 				<div style={Styles.row} >
 					<div style={Styles.left}>{this.props.name}</div>
-					<div style={Styles.right}>></div>
+					<div style={Styles.right}><Icon name="chevron-right" /></div>
 				</div>
 			</Link>
 		);
