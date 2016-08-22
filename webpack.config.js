@@ -4,6 +4,7 @@ module.exports = {
 
 	entry: "./index.js",
 	output: {
+        path:'./lib/',
         filename: "app.js"
 	},
 	// 解决的文件
