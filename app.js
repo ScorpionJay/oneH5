@@ -29253,6 +29253,8 @@
 
 	var _reactRouter = __webpack_require__(198);
 
+	var _reactFa = __webpack_require__(260);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29287,7 +29289,7 @@
 						_react2.default.createElement(
 							'div',
 							{ style: Styles.right },
-							'>'
+							_react2.default.createElement(_reactFa.Icon, { name: 'chevron-right' })
 						)
 					)
 				);
@@ -30144,33 +30146,68 @@
 
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ style: Styles.container },
 					_react2.default.createElement(
 						'div',
-						null,
-						'头像'
+						{ style: Styles.row },
+						_react2.default.createElement(
+							'div',
+							{ style: Styles.picture },
+							_react2.default.createElement(
+								'div',
+								{ style: Styles.left },
+								'头像'
+							),
+							_react2.default.createElement(_reactFa.Icon, { name: 'angle-right', style: Styles.pictureRight })
+						)
 					),
 					_react2.default.createElement(
 						'div',
-						null,
+						{ style: Styles.row },
 						_react2.default.createElement(
 							'div',
-							null,
-							'相册',
-							_react2.default.createElement(_reactFa.Icon, { name: 'angle-right' })
+							{ style: Styles.item },
+							_react2.default.createElement(
+								'div',
+								{ style: Styles.left },
+								_react2.default.createElement(_reactFa.Icon, { name: 'photo', style: Styles.leftIcon }),
+								_react2.default.createElement(
+									'div',
+									{ style: Styles.leftText },
+									'相册'
+								)
+							),
+							_react2.default.createElement(_reactFa.Icon, { name: 'angle-right', style: Styles.right })
 						),
 						_react2.default.createElement(
 							'div',
-							null,
-							_react2.default.createElement(_reactFa.Icon, { name: 'cube' }),
-							'收藏',
-							_react2.default.createElement(_reactFa.Icon, { name: 'angle-right' })
+							{ style: Styles.item },
+							_react2.default.createElement(
+								'div',
+								{ style: Styles.left },
+								_react2.default.createElement(_reactFa.Icon, { name: 'cube', style: Styles.leftIcon }),
+								_react2.default.createElement(
+									'div',
+									{ style: Styles.leftText },
+									'收藏'
+								)
+							),
+							_react2.default.createElement(_reactFa.Icon, { name: 'angle-right', style: Styles.right })
 						),
 						_react2.default.createElement(
 							'div',
-							null,
-							'设置',
-							_react2.default.createElement(_reactFa.Icon, { name: 'angle-right' })
+							{ style: Styles.item },
+							_react2.default.createElement(
+								'div',
+								{ style: Styles.left },
+								_react2.default.createElement(_reactFa.Icon, { name: 'gear', style: Styles.leftIcon }),
+								_react2.default.createElement(
+									'div',
+									{ style: Styles.leftText },
+									'设置'
+								)
+							),
+							_react2.default.createElement(_reactFa.Icon, { name: 'angle-right', style: Styles.right })
 						)
 					)
 				);
@@ -30183,7 +30220,48 @@
 	exports.default = Me;
 
 
-	var Styles = {};
+	var Styles = {
+		container: {
+			display: 'flex',
+			flexDirection: 'column'
+		},
+		row: {
+			marginBottom: 10
+		},
+		item: {
+			display: 'flex',
+			padding: 10,
+			backgroundColor: '#fff',
+			fontSize: 20,
+			borderTop: '1px solid #eee'
+		},
+		left: {
+			justifyContent: 'flex-start',
+			flex: 1,
+			display: 'flex'
+		},
+		leftIcon: {
+			color: "rgb(11, 101, 216)"
+		},
+		leftText: {
+			marginLeft: 10,
+			color: 'rgb(117, 112, 112)'
+		},
+		right: {
+			alignSelf: 'flex-end'
+		},
+		picture: {
+			height: 50,
+			display: 'flex',
+			padding: 10,
+			backgroundColor: '#fff',
+			color: '#aaa',
+			fontSize: 20
+		},
+		pictureRight: {
+			alignSelf: 'center'
+		}
+	};
 
 /***/ },
 /* 289 */
