@@ -21,7 +21,7 @@ one h5 demo
 
 2. run
 
-	webpack-dev-server --progress --colors
+	webpack-dev-server
 
 	open browser http://localhost:8080/webpack-dev-server/
 

@@ -2,9 +2,9 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
 
-	entry: "./index.js",
+	entry: "./src/index.js",
 	output: {
-        path:'./lib/',
+        path:'./dist/',
         filename: "app.js"
 	},
 	// 解决的文件
