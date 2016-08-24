@@ -1,23 +1,25 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { login} from '../actions/login'
-import AddTodo from '../components/AddTodo'
-import TodoList from '../components/TodoList'
+import { loginFetch} from '../actions/login'
+
 import Bar from '../components/common/Bar'
 
 import Login from '../components/login/Login'
+
+import Alert from '../components/common/Alert'
 
 class App extends Component {
 
   render() {
     // Injected by connect() call:
-    const { dispatch, reducerTodos } = this.props
+    const { dispatch, loginError } = this.props
     return (
       <div>
         <Bar center='发现'/>
         <div style={Styles.content}>
-          <Login onLoginClick={(username,password) =>dispatch(login(username,password))} />
+          <Login onLoginClick={(username,password) =>dispatch(loginFetch(username,password))} />
         </div>
+        <Alert show={true} message = {loginError}/>
       </div>
     )
   }
@@ -27,7 +29,8 @@ class App extends Component {
 function map(state) {
   console.log("state" , state )
   return {
-    reducerTodos: state.reducers.todos
+    login: state.login.login,
+    loginError: state.login.loginError
   }
 }
 

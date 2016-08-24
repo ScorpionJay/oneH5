@@ -40,10 +40,11 @@ export function fetchListItemApi(id){
 			//mode: "cors"
 			}).then(function(response) {
 				
-    return response.json()
-  }).then(function(json) {
-     dispatch(fetchListItem(json[id-1]))
-  }).catch(function(ex) {
-    console.log('parsing failed', ex)
-  })}
+	    return response.json()
+	  }).then(function(json) {
+	     dispatch(fetchListItem(json[id-1]))
+	  }).catch(function(ex) {
+	    console.log('parsing failed', ex)
+	  })
+	}
 }
