@@ -1,3 +1,5 @@
+import 'whatwg-fetch'
+
 /**
 *	action 类型
 */

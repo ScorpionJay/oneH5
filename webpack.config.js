@@ -2,9 +2,11 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
 
-	entry: "./src/index.js",
+    entry: {
+        app: [ 'babel-polyfill', './src/index.js' ]
+    },
 	output: {
-        path:'./dist/',
+        //path:'./dist/',
         filename: "app.js"
 	},
 	// 解决的文件

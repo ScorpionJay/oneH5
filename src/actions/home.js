@@ -1,3 +1,5 @@
+import 'whatwg-fetch'
+
 export const FETCH_LIST = 'FETCH_LIST'
 export const FETCH_LIST_ITEM = 'FETCH_LIST_ITEM'
 

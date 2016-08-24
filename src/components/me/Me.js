@@ -3,6 +3,8 @@ import React , { Component } from 'react'
 import Bar from '../common/Bar'
 import {Icon} from 'react-fa'
 
+import {Link } from 'react-router'
+
 export default class Me extends Component{
 
 
@@ -12,10 +14,12 @@ export default class Me extends Component{
 			<div style={Styles.container}>
 
 				<div style={Styles.row}>
+					<Link to={"login"} >
 					<div style={Styles.picture}>
 						<div style={Styles.left}>头像</div>
 						<Icon name="angle-right"  style={Styles.pictureRight}/>
 					</div>
+					</Link>
 				</div>
 
 				<div style={Styles.row}>

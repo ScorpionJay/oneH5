@@ -21,7 +21,7 @@ one h5 demo
 
 2. run
 
-	webpack-dev-server
+	webpack-dev-server --progress --colors
 
 	open browser http://localhost:8080/webpack-dev-server/
 
@@ -34,3 +34,19 @@ one h5 demo
 1. fetch is no supported by Safari
 
 	https://github.com/github/fetch
+
+
+
+## 问题
+
+不支持fetch，使用babel-polyfill
+
+~~~js
+entry: {
+        app: [ 'babel-polyfill', './src/index.js' ]
+},
+
+
+调用的地引入这个
+import 'whatwg-fetch'
+~~~

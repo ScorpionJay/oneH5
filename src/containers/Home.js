@@ -6,6 +6,7 @@ import Slide from '../components/Home/Slide'
 import List from '../components/Home/List'
 
 import Bar from '../components/common/Bar'
+import Tab from '../components/common/Tab'
 
 class App extends Component {
 
@@ -23,6 +24,7 @@ class App extends Component {
           <Slide/>
           <List data={this.props.data} />
         </div>
+        <Tab/>
       </div>
     )
   }

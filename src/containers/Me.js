@@ -5,6 +5,7 @@ import AddTodo from '../components/AddTodo'
 import TodoList from '../components/TodoList'
 import Bar from '../components/common/Bar'
 import Me from '../components/me/Me'
+import Tab from '../components/common/Tab'
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
         <div style={Styles.content}>
           <Me />
         </div>
+        <Tab/>
       </div>
     )
   }

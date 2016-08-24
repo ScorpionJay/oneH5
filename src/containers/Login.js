@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { addTodo,completeTodo ,fetchList} from '../actions/actions'
+import { login} from '../actions/login'
 import AddTodo from '../components/AddTodo'
 import TodoList from '../components/TodoList'
 import Bar from '../components/common/Bar'
-import Tab from '../components/common/Tab'
+
+import Login from '../components/login/Login'
 
 class App extends Component {
+
   render() {
     // Injected by connect() call:
     const { dispatch, reducerTodos } = this.props
@@ -14,15 +16,8 @@ class App extends Component {
       <div>
         <Bar center='发现'/>
         <div style={Styles.content}>
-          <AddTodo
-            onAddClick={text =>
-              dispatch(fetchList(text))
-            } />
-          <TodoList
-            todos={reducerTodos} 
-            onTodoClick={index=> dispatch(completeTodo(index))}/>
+          <Login onLoginClick={(username,password) =>dispatch(login(username,password))} />
         </div>
-        <Tab/>
       </div>
     )
   }

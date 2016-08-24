@@ -9,6 +9,8 @@ import TodoItem from './containers/TodoItem'
 import Find from './containers/Find'
 import Me from './containers/Me'
 
+import Login from './containers/Login'
+
 
 
 /* App */
@@ -16,34 +18,7 @@ class App extends Component{
 	render(){
 		return (
 			<div className="nav">
-
-				
-				
 				<div className="content" >{this.props.children}</div>
-
-				<div className='footer'>
-					<ul className="nav-ul">
-						<li>
-							<Link to="/home" activeClassName="active"> 
-								<Icon name="star" />
-								<div>首页</div>
-							</Link>
-						</li>
-						<li>
-							<Link to="/find" activeClassName="active">
-								<Icon name="rocket" />
-								<div>发现</div>
-							</Link>
-						</li>
-						<li>
-							<Link to="/me" activeClassName="active">
-								<Icon name="user" />
-								<div>我</div>
-							</Link>
-						</li>
-					</ul>
-				</div>
-				
 			</div>
 		);
 	}
@@ -59,6 +34,7 @@ const Routes = {
 		{ path: 'todoItem', component: TodoItem},
 		{ path: 'find', component: Find},
 		{ path: 'me', component: Me},
+		{ path: 'login', component: Login},
 		{ path: 'itemDetail/:id', component: ItemDetail},
 		{
 			path: 'itemDetail',
