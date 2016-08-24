@@ -28,7 +28,7 @@ class App extends Component{
 const Routes = {
 	path: '/',
 	component: App,
-	indexRoute :{component: Home},
+	indexRoute :{onEnter: (nextState, replace) => replace('/home')},
 	childRoutes: [
 		{ path: 'home', component: Home},
 		{ path: 'todoItem', component: TodoItem},
