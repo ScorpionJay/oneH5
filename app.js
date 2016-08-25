@@ -38917,9 +38917,9 @@
 	      var store = _context.store;
 
 	      console.log('redirect ... ');
-	      _reactRouter.browserHistory.push('me');
+	      //browserHistory.push('me')
 	      // history.pushState(null, '/me')
-	      this.props.history.push('me');
+	      this.props.history.push('/me');
 	      // router.push('me')
 	      //this.context.router.push('me')
 	    }
