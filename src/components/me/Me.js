@@ -8,15 +8,32 @@ import {Link } from 'react-router'
 export default class Me extends Component{
 
 
+	constructor(props) {
+	  super(props);
+	
+	  this.state = {};
+	  console.log('是否登录', this.props.login)
+
+
+
+	  console.log('me data', this.props.me)
+	}
+
+
 	render(){
 		
+		const {avatar_url,login} = this.props.me
+
 		return (
 			<div style={Styles.container}>
 
 				<div style={Styles.row}>
 					<Link to={"login"} >
 					<div style={Styles.picture}>
-						<div style={Styles.left}>头像</div>
+						<div style={Styles.left}>
+							<img src={avatar_url} style={{width:40,height:40}}/>
+							{login}
+						</div>
 						<Icon name="angle-right"  style={Styles.pictureRight}/>
 					</div>
 					</Link>

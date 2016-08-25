@@ -8179,19 +8179,19 @@
 
 	var _routers2 = _interopRequireDefault(_routers);
 
-	var _stores = __webpack_require__(592);
+	var _stores = __webpack_require__(595);
 
 	var _stores2 = _interopRequireDefault(_stores);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(597);
+	__webpack_require__(602);
 
 	var store = (0, _stores2.default)();
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
-	  _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.hashHistory, routes: _routers2.default })
+	  _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.browserHistory, routes: _routers2.default })
 	), document.getElementById('root'));
 
 /***/ },
@@ -36542,7 +36542,7 @@
 
 	var _Me2 = _interopRequireDefault(_Me);
 
-	var _Login = __webpack_require__(588);
+	var _Login = __webpack_require__(590);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
@@ -36588,7 +36588,9 @@
 	var Routes = {
 		path: '/',
 		component: App,
-		indexRoute: { component: _Home2.default },
+		indexRoute: { onEnter: function onEnter(nextState, replace) {
+				return replace('/home');
+			} },
 		childRoutes: [{ path: 'home', component: _Home2.default }, { path: 'todoItem', component: _TodoItem2.default }, { path: 'find', component: _Find2.default }, { path: 'me', component: _Me2.default }, { path: 'login', component: _Login2.default }, { path: 'itemDetail/:id', component: _ItemDetail2.default }, {
 			path: 'itemDetail',
 			component: _ItemDetail2.default,
@@ -38485,7 +38487,7 @@
 
 	var _reactRedux = __webpack_require__(486);
 
-	var _actions = __webpack_require__(581);
+	var _me = __webpack_require__(587);
 
 	var _AddTodo = __webpack_require__(582);
 
@@ -38499,7 +38501,7 @@
 
 	var _Bar2 = _interopRequireDefault(_Bar);
 
-	var _Me = __webpack_require__(587);
+	var _Me = __webpack_require__(589);
 
 	var _Me2 = _interopRequireDefault(_Me);
 
@@ -38525,12 +38527,22 @@
 	  }
 
 	  _createClass(App, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _props = this.props;
+	      var dispatch = _props.dispatch;
+	      var login = _props.login;
+
+	      if (login) dispatch((0, _me.meFetchData)(login));
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      // Injected by connect() call:
-	      var _props = this.props;
-	      var dispatch = _props.dispatch;
-	      var reducerTodos = _props.reducerTodos;
+	      var _props2 = this.props;
+	      var dispatch = _props2.dispatch;
+	      var login = _props2.login;
+	      var me = _props2.me;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -38539,7 +38551,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { style: Styles.content },
-	          _react2.default.createElement(_Me2.default, null)
+	          _react2.default.createElement(_Me2.default, { login: login, me: me })
 	        ),
 	        _react2.default.createElement(_Tab2.default, null)
 	      );
@@ -38552,7 +38564,8 @@
 	function map(state) {
 	  console.log("state", state);
 	  return {
-	    reducerTodos: state.todos
+	    login: state.login.login,
+	    me: state.me.user
 	  };
 	}
 
@@ -38568,6 +38581,106 @@
 
 /***/ },
 /* 587 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.USER = undefined;
+	exports.meFetchData = meFetchData;
+	exports.user = user;
+
+	__webpack_require__(572);
+
+	var _config = __webpack_require__(588);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	*	action 类型
+	*/
+	var USER = exports.USER = 'USER';
+
+	// export const COMPLETE_TODO = 'COMPLETE_TODO'
+
+	// export function addTodo(text){
+	// 	return {
+	// 		type: ADD_TODO,text
+	// 	}
+	// }
+
+
+	function meFetchData(token) {
+	  return function (dispatch) {
+	    fetch(_config2.default.user).then(function (response) {
+	      return response.json();
+	    }).then(function (data) {
+	      console.log(data);
+	      dispatch(user(data));
+	    }).catch(function (ex) {
+	      console.log('parsing failed', ex);
+	    });
+	  };
+	}
+
+	function user(data) {
+	  return {
+	    type: USER, data: data
+	  };
+	}
+
+/***/ },
+/* 588 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//const serviceUrl = 'http://wind.zicp.net/v1/' //测试url
+	var serviceUrl = 'http://192.16.2.197:8889/v1/'; //测试url
+
+
+	exports.default = {
+	  initTab: 'Home',
+	  loginUrl: serviceUrl,
+	  registerUrl: serviceUrl + 'register',
+	  accountUrl: serviceUrl + 'account',
+	  accountUserUrl: serviceUrl + 'account/user',
+	  accountSignUrl: serviceUrl + 'account/sign',
+	  fileUpload: serviceUrl + 'file/save',
+	  fileUrl: serviceUrl + 'file/',
+	  postsUrl: serviceUrl + 'article/posts',
+	  postUrl: serviceUrl + 'article/post/',
+	  test: 'https://gist.githubusercontent.com/ScorpionJay/de11dc5bacefea9cee5394b73f456688/raw/e86fd421e4bce5c85dd87d29ddc7315ec1d33eed/list.json',
+	  user: 'https://api.github.com/users/scorpionjay',
+
+	  pageSize: 10,
+
+	  postListApi: serviceUrl + 'post/list/',
+	  postApi: serviceUrl + 'post/add/',
+
+	  postApiTest: serviceUrl + 'file/singleSave/',
+
+	  postApi2: serviceUrl + 'post/post/',
+
+	  postAll: serviceUrl + 'post/lists',
+
+	  thumbnailApi: serviceUrl + 'file/thumbnail/', //缩略图
+
+
+	  word: 'WORD',
+	  picture: 'PICTURE'
+
+	};
+
+/***/ },
+/* 589 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38601,15 +38714,25 @@
 	var Me = function (_Component) {
 		_inherits(Me, _Component);
 
-		function Me() {
+		function Me(props) {
 			_classCallCheck(this, Me);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Me).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Me).call(this, props));
+
+			_this.state = {};
+			console.log('是否登录', _this.props.login);
+
+			console.log('me data', _this.props.me);
+			return _this;
 		}
 
 		_createClass(Me, [{
 			key: 'render',
 			value: function render() {
+				var _props$me = this.props.me;
+				var avatar_url = _props$me.avatar_url;
+				var login = _props$me.login;
+
 
 				return _react2.default.createElement(
 					'div',
@@ -38626,7 +38749,8 @@
 								_react2.default.createElement(
 									'div',
 									{ style: Styles.left },
-									'头像'
+									_react2.default.createElement('img', { src: avatar_url, style: { width: 40, height: 40 } }),
+									login
 								),
 								_react2.default.createElement(_reactFa.Icon, { name: 'angle-right', style: Styles.pictureRight })
 							)
@@ -38735,7 +38859,7 @@
 	};
 
 /***/ },
-/* 588 */
+/* 590 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38752,23 +38876,21 @@
 
 	var _reactRedux = __webpack_require__(486);
 
-	var _login = __webpack_require__(589);
+	var _reactRouter = __webpack_require__(495);
 
-	var _AddTodo = __webpack_require__(582);
-
-	var _AddTodo2 = _interopRequireDefault(_AddTodo);
-
-	var _TodoList = __webpack_require__(583);
-
-	var _TodoList2 = _interopRequireDefault(_TodoList);
+	var _login = __webpack_require__(591);
 
 	var _Bar = __webpack_require__(576);
 
 	var _Bar2 = _interopRequireDefault(_Bar);
 
-	var _Login = __webpack_require__(591);
+	var _Login = __webpack_require__(593);
 
 	var _Login2 = _interopRequireDefault(_Login);
+
+	var _Alert = __webpack_require__(594);
+
+	var _Alert2 = _interopRequireDefault(_Alert);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38788,12 +38910,28 @@
 	  }
 
 	  _createClass(App, [{
+	    key: 'redirect',
+	    value: function redirect() {
+	      var _context = this.context;
+	      var history = _context.history;
+	      var store = _context.store;
+
+	      console.log('redirect ... ');
+	      _reactRouter.browserHistory.push('me');
+	      // history.pushState(null, '/me')
+	      //this.props.history.push('me')
+	      // router.push('me')
+	      //this.context.router.push('me')
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      // Injected by connect() call:
 	      var _props = this.props;
 	      var dispatch = _props.dispatch;
-	      var reducerTodos = _props.reducerTodos;
+	      var loginError = _props.loginError;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -38803,9 +38941,12 @@
 	          'div',
 	          { style: Styles.content },
 	          _react2.default.createElement(_Login2.default, { onLoginClick: function onLoginClick(username, password) {
-	              return dispatch((0, _login.login)(username, password));
+	              return dispatch((0, _login.loginFetch)(username, password, function () {
+	                return _this2.redirect();
+	              }));
 	            } })
-	        )
+	        ),
+	        _react2.default.createElement(_Alert2.default, { show: true, message: loginError })
 	      );
 	    }
 	  }]);
@@ -38816,7 +38957,8 @@
 	function map(state) {
 	  console.log("state", state);
 	  return {
-	    reducerTodos: state.reducers.todos
+	    login: state.login.login,
+	    loginError: state.login.loginError
 	  };
 	}
 
@@ -38832,97 +38974,149 @@
 	};
 
 /***/ },
-/* 589 */
+/* 591 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
-	exports.LOGIN = undefined;
+	exports.LOGIN_ERROR = exports.LOGIN = undefined;
+	exports.loginFetch = loginFetch;
+	exports.loginError = loginError;
 	exports.login = login;
 
 	__webpack_require__(572);
 
-	var _config = __webpack_require__(590);
+	var _config = __webpack_require__(588);
 
 	var _config2 = _interopRequireDefault(_config);
+
+	var _storage = __webpack_require__(592);
+
+	var _storage2 = _interopRequireDefault(_storage);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var LOGIN = exports.LOGIN = 'LOGIN';
 
-	function login(username, password) {
-	  console.log('actions', username, password);
+	var LOGIN_ERROR = exports.LOGIN_ERROR = 'LOGIN_ERROR';
 
-	  var data = {
-	    'Username': username,
-	    'Password': password
-	  };
-	  // fetch login
-	  fetch(_config2.default.loginUrl, {
-	    //mode: "cors",// 跨域
-	    headers: {
-	      'Username': username,
-	      'Password': password
-	    },
-	    method: 'POST'
-	  }).then(function (response) {
-	    var authToken = response.headers.get("Auth-Token");
-	    console.log("authToken", authToken);
-	  }).catch(function (ex) {
-	    console.log('parsing failed', ex);
-	  });
+	/**
+	*  跨域服务器没有解决 暂时模拟
+	*/
+	// export function loginFetch(username,password,redirect){
+	// 	console.log('actions',username,password)
+	// 	// fetch login
+	// 	return dispatch => { 
+	// 	 	fetch(Config.loginUrl,{
+	// 	 	  //mode: "cors",// 跨域
+	//           headers: {
+	//             'Username': username,
+	//             'Password': password
+	//           },
+	//           method: 'POST'
+	//         })
+	//         .then((response) => {
+	//               const authToken = response.headers.get("Auth-Token");
+	//                console.log("authToken",authToken)
+	//                if(authToken){
+	//                 	// 持久化
+	// 	               Storage.put('token',authToken)
 
-	  return {
-	    type: LOGIN, username: username, password: password
-	  };
+	// 	               dispatch(login(authToken))
+	// 	               // 页面跳转
+	// 	               if (redirect) redirect()
+	//                }else{
+	//                	 console.log('帐号或密码错误')
+	//                	 dispatch(loginError('帐号或密码错误'))
+	//                }
+
+	//         })
+	//         .catch(function(ex) {
+	//           console.log('parsing failed', ex)
+	//         })
+	// 	}
+
+	// 	// return {
+	// 	// 	type: LOGIN,username,password
+	// 	// }
+
+	// }
+
+	function loginFetch(username, password, redirect) {
+		console.log('actions', username, password);
+		// fetch login
+		return function (dispatch) {
+			fetch('https://gist.githubusercontent.com/ScorpionJay/de11dc5bacefea9cee5394b73f456688/raw/e86fd421e4bce5c85dd87d29ddc7315ec1d33eed/list.json', {
+				method: 'get'
+			}).then(function (response) {
+				var token = Math.random().toString(36).substring(7);
+				console.log("authToken", token);
+				if (token) {
+					// 持久化
+					_storage2.default.put('token', token);
+
+					dispatch(login(token));
+					// 页面跳转
+					if (redirect) redirect();
+				} else {
+					console.log('帐号或密码错误');
+					dispatch(loginError('帐号或密码错误'));
+				}
+			}).catch(function (ex) {
+				console.log('parsing failed', ex);
+			});
+		};
+	}
+
+	function loginError(message) {
+		console.log('action', message);
+		return {
+			type: LOGIN_ERROR, message: message
+		};
+	}
+
+	function login(token) {
+		return {
+			type: LOGIN, token: token
+		};
 	}
 
 /***/ },
-/* 590 */
+/* 592 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
-	var serviceUrl = 'http://wind.zicp.net/v1/'; //测试url
-
+	/**
+	* use localStorage to persistence
+	*/
 	exports.default = {
-	  initTab: 'Home',
-	  loginUrl: serviceUrl,
-	  registerUrl: serviceUrl + 'register',
-	  accountUrl: serviceUrl + 'account',
-	  accountSignUrl: serviceUrl + 'account/sign',
-	  fileUpload: serviceUrl + 'file/save',
-	  fileUrl: serviceUrl + 'file/',
-	  postsUrl: serviceUrl + 'article/posts',
-	  postUrl: serviceUrl + 'article/post/',
 
-	  pageSize: 10,
+		put: function put(key, value) {
+			window.localStorage.setItem(key, value);
+		},
 
-	  postListApi: serviceUrl + 'post/list/',
-	  postApi: serviceUrl + 'post/add/',
+		get: function get(key) {
+			return window.localStorage.getItem(key);
+		},
 
-	  postApiTest: serviceUrl + 'file/singleSave/',
+		remove: function remove(key) {
+			return window.localStorage.removeItem(key);
+		},
 
-	  postApi2: serviceUrl + 'post/post/',
-
-	  postAll: serviceUrl + 'post/lists',
-
-	  thumbnailApi: serviceUrl + 'file/thumbnail/', //缩略图
-
-
-	  word: 'WORD',
-	  picture: 'PICTURE'
-
+		clear: function clear() {
+			window.localStorage.clear();
+		}
 	};
 
 /***/ },
-/* 591 */
+/* 593 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39024,18 +39218,86 @@
 	};
 
 /***/ },
-/* 592 */
+/* 594 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Alert = function (_Component) {
+		_inherits(Alert, _Component);
+
+		function Alert() {
+			_classCallCheck(this, Alert);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Alert).apply(this, arguments));
+		}
+
+		_createClass(Alert, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					{ style: this.props.show ? Styles.container : Styles.container2 },
+					this.props.message
+				);
+			}
+		}]);
+
+		return Alert;
+	}(_react.Component);
+
+	exports.default = Alert;
+
+
+	var Styles = {
+		container: {
+			position: 'fixed',
+			top: '50%',
+			left: '40%',
+			height: 50,
+			backgroundColor: 'red'
+		},
+		container2: {
+			display: 'none',
+			position: 'fixed',
+			top: '50%',
+			left: '40%',
+			height: 50,
+			backgroundColor: 'red'
+		}
+	};
+
+/***/ },
+/* 595 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _redux = __webpack_require__(472);
 
-	var _reduxThunk = __webpack_require__(593);
+	var _reduxThunk = __webpack_require__(596);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _index = __webpack_require__(594);
+	var _index = __webpack_require__(597);
 
 	var _index2 = _interopRequireDefault(_index);
 
@@ -39049,7 +39311,7 @@
 	};
 
 /***/ },
-/* 593 */
+/* 596 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39077,7 +39339,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 594 */
+/* 597 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39088,24 +39350,32 @@
 
 	var _redux = __webpack_require__(472);
 
-	var _home = __webpack_require__(595);
+	var _home = __webpack_require__(598);
 
 	var _home2 = _interopRequireDefault(_home);
 
-	var _reducers = __webpack_require__(596);
+	var _reducers = __webpack_require__(599);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
+
+	var _login = __webpack_require__(600);
+
+	var _login2 = _interopRequireDefault(_login);
+
+	var _me = __webpack_require__(601);
+
+	var _me2 = _interopRequireDefault(_me);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var todoApp = (0, _redux.combineReducers)({
-	  home: _home2.default, reducers: _reducers2.default
+	  login: _login2.default, home: _home2.default, reducers: _reducers2.default, me: _me2.default
 	});
 
 	exports.default = todoApp;
 
 /***/ },
-/* 595 */
+/* 598 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39151,7 +39421,7 @@
 	exports.default = todoApp;
 
 /***/ },
-/* 596 */
+/* 599 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39192,7 +39462,84 @@
 	exports.default = todoApp;
 
 /***/ },
-/* 597 */
+/* 600 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _redux = __webpack_require__(472);
+
+	var _login = __webpack_require__(591);
+
+	function loginError() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _login.LOGIN_ERROR:
+	      return action.message;
+	    default:
+	      return state;
+	  }
+	}
+
+	function login() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _login.LOGIN:
+	      return action.token;
+	    default:
+	      return state;
+	  }
+	}
+
+	var todoApp = (0, _redux.combineReducers)({
+	  login: login, loginError: loginError
+	});
+
+	exports.default = todoApp;
+
+/***/ },
+/* 601 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _redux = __webpack_require__(472);
+
+	var _me = __webpack_require__(587);
+
+	function user() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+
+	  console.log('data hhhh', action);
+	  switch (action.type) {
+	    case _me.USER:
+	      return action.data;
+	    default:
+	      return state;
+	  }
+	}
+
+	var todoApp = (0, _redux.combineReducers)({
+	  user: user
+	});
+
+	exports.default = todoApp;
+
+/***/ },
+/* 602 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

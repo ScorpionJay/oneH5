@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { addTodo,completeTodo ,fetchList} from '../actions/actions'
+import { meFetchData} from '../actions/me'
 import AddTodo from '../components/AddTodo'
 import TodoList from '../components/TodoList'
 import Bar from '../components/common/Bar'
@@ -8,14 +8,21 @@ import Me from '../components/me/Me'
 import Tab from '../components/common/Tab'
 
 class App extends Component {
+
+  componentDidMount() {
+    const { dispatch,login } = this.props
+    if(login)  dispatch(meFetchData(login))
+  }
+
+
   render() {
     // Injected by connect() call:
-    const { dispatch, reducerTodos } = this.props
+    const { dispatch, login,me } = this.props
     return (
       <div>
         <Bar center='我'/>
         <div style={Styles.content}>
-          <Me />
+          <Me login={login}  me={me}/>
         </div>
         <Tab/>
       </div>
@@ -27,7 +34,8 @@ class App extends Component {
 function map(state) {
   console.log("state" , state )
   return {
-    reducerTodos: state.todos
+    login: state.login.login,
+    me: state.me.user
   }
 }
 

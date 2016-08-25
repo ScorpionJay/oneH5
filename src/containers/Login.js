@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { browserHistory,history,router } from 'react-router'
 import { loginFetch} from '../actions/login'
 
 import Bar from '../components/common/Bar'
@@ -10,6 +11,16 @@ import Alert from '../components/common/Alert'
 
 class App extends Component {
 
+  redirect(){
+     const { history, store } = this.context
+    console.log('redirect ... ')
+    browserHistory.push('me')
+    // history.pushState(null, '/me')
+    //this.props.history.push('me')
+    // router.push('me')
+    //this.context.router.push('me')
+  }
+
   render() {
     // Injected by connect() call:
     const { dispatch, loginError } = this.props
@@ -17,7 +28,7 @@ class App extends Component {
       <div>
         <Bar center='发现'/>
         <div style={Styles.content}>
-          <Login onLoginClick={(username,password) =>dispatch(loginFetch(username,password))} />
+          <Login onLoginClick={(username,password) =>dispatch(loginFetch(username,password, ()=>this.redirect()  ))} />
         </div>
         <Alert show={true} message = {loginError}/>
       </div>

@@ -2,9 +2,7 @@ import { combineReducers } from 'redux'
 import { LOGIN,LOGIN_ERROR } from '../actions/login'
 
 
-
 function loginError(state = '', action) {
-  console.log('reducers login error',action)
   switch (action.type) {
     case LOGIN_ERROR:
       return action.message
