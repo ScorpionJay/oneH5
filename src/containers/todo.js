@@ -1,28 +1,26 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchFollowers } from '../actions/find'
-import Followers from '../components/find/followers'
+import { addTodo,completeTodo ,fetchList} from '../actions/actions'
+import AddTodo from '../components/AddTodo'
+import TodoList from '../components/TodoList'
 import Bar from '../components/common/Bar'
 import Tab from '../components/common/Tab'
 
 class App extends Component {
-
-
-  componentDidMount(){
-    const { dispatch, data } = this.props
-    dispatch(fetchFollowers())
-  }
-
-
-
   render() {
     // Injected by connect() call:
-    const { dispatch, followers } = this.props
+    const { dispatch, reducerTodos } = this.props
     return (
       <div>
         <Bar center='发现'/>
         <div style={Styles.content}>
-          <Followers followers={followers}/>
+          <AddTodo
+            onAddClick={text =>
+              dispatch(fetchList(text))
+            } />
+          <TodoList
+            todos={reducerTodos} 
+            onTodoClick={index=> dispatch(completeTodo(index))}/>
         </div>
         <Tab/>
       </div>
@@ -34,10 +32,11 @@ class App extends Component {
 function map(state) {
   console.log("state" , state )
   return {
-    followers: state.find.followers
+    reducerTodos: state.reducers.todos
   }
 }
 
+// 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
 export default connect(map)(App)
 
 const Styles = {
