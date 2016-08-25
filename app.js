@@ -39301,12 +39301,21 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
+	var _login = __webpack_require__(591);
+
+	var _storage = __webpack_require__(592);
+
+	var _storage2 = _interopRequireDefault(_storage);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	module.exports = function (initialState) {
-	  // 原来的日志中间件先给去掉了，其实applyMiddleware的参数列表里面是可以放任意多个中间件的
 	  var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_reduxThunk2.default)(_redux.createStore);
 	  var store = createStoreWithMiddleware(_index2.default, initialState);
+
+	  // get token from storage
+	  store.dispatch((0, _login.login)(_storage2.default.get('token')));
+
 	  return store;
 	};
 
