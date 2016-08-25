@@ -8191,7 +8191,7 @@
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
-	  _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.browserHistory, routes: _routers2.default })
+	  _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.hashHistory, routes: _routers2.default })
 	), document.getElementById('root'));
 
 /***/ },
@@ -38919,7 +38919,7 @@
 	      console.log('redirect ... ');
 	      _reactRouter.browserHistory.push('me');
 	      // history.pushState(null, '/me')
-	      //this.props.history.push('me')
+	      this.props.history.push('me');
 	      // router.push('me')
 	      //this.context.router.push('me')
 	    }

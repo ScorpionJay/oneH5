@@ -11,7 +11,7 @@ require('./sass/_main')
 const store = configureStore();
 render(
   <Provider store={store}>
-    <Router history={browserHistory} routes={Routers} />
+    <Router history={hashHistory} routes={Routers} />
   </Provider>,
   document.getElementById('root')
 )

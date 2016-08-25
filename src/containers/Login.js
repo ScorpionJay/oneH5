@@ -16,7 +16,7 @@ class App extends Component {
     console.log('redirect ... ')
     browserHistory.push('me')
     // history.pushState(null, '/me')
-    //this.props.history.push('me')
+    this.props.history.push('me')
     // router.push('me')
     //this.context.router.push('me')
   }
