@@ -10,13 +10,7 @@ export default class Me extends Component{
 
 	constructor(props) {
 	  super(props);
-	
 	  this.state = {};
-	  console.log('是否登录', this.props.login)
-
-
-
-	  console.log('me data', this.props.me)
 	}
 
 

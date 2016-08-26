@@ -33,7 +33,6 @@ class App extends Component {
 }
 
 function map(state) {
-  console.log("state" , state )
   return {
     data: state.home.fetchList,
     spin: state.spin.spin

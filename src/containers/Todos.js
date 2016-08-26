@@ -24,7 +24,6 @@ class App extends Component {
 
 
 function map(state) {
-  console.log("state" , state )
   return {
     reducerTodos: state.todos
   }

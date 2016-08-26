@@ -5,8 +5,6 @@ export default class Spin extends Component {
 
 
 	render() {
-
-		console.log('jjjjj',this.props.spin)
 		return (
 			<div style={ (this.props.spin ? Styles.show : Styles.hidden) }>
 				Loading...

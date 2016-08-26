@@ -12,9 +12,6 @@ export function addTodo(text){
 }
 
 export function fetchListItem(value){
-
-	console.log('action',value)
-
 	return {
 		type:FETCH_LIST_ITEM,value
 	}

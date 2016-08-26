@@ -38,7 +38,6 @@ class App extends Component {
 
 
 function map(state) {
-  console.log("state" , state )
   return {
     login: state.login.login,
     loginError: state.login.loginError

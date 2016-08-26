@@ -32,7 +32,6 @@ export default class List extends Component{
 
 
 function map(state) {
-  console.log("state" , state )
   return {
     item: state.home.fetchItem
   }
