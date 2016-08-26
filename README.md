@@ -19,15 +19,19 @@ one h5 demo
    
 	npm install
 
+	npm install webpack -g
+
 2. run
 
 	webpack-dev-server --progress --colors
 
-	open browser http://localhost:8080/webpack-dev-server/
+	open browser http://localhost:8080/webpack-dev-server/dev
 
 3. package
 	
-	webpack
+	webpack -p --config webpack.config.build.js
+
+	这里的 -p 是 production 模式的意思，它会对 css, js 文件进行压缩。后面 --config 就是指定此次运行的配置文件。
 
 
 ##　TODO
